@@ -1,10 +1,10 @@
 class Tree
   require_relative 'node'
-  attr_accessor :root
+  attr_accessor :root, :sorted_arr
   
   def initialize(arr)
-    sorted_arr = arr.uniq.sort
-    @root = self.build_tree(sorted_arr)
+    @sorted_arr = arr.uniq.sort
+    @root = self.build_tree(@sorted_arr)
   end
 
   def build_tree(input)
@@ -13,10 +13,7 @@ class Tree
     else
       root_index = input.length / 2
       if root_index == 0
-        if input[root_index] == nil
-          return Node.new('nil')
-        end
-        return Node.new(input[root_index])
+        return input[root_index] == nil ? Node.new('nil') : Node.new(input[root_index])
       end
       Node.new(input[root_index], build_tree(input[0..root_index - 1]), build_tree(input[root_index + 1..input.length]))
     end
