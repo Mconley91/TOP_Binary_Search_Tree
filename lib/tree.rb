@@ -7,21 +7,19 @@ class Tree
     @root = self.build_tree(sorted_arr)
   end
 
-  def build_tree(arr)
-    root_value = arr[arr.length / 2]
-    root_index = arr.length / 2
-    this_node = Node.new(root_value, arr[0..root_index - 1], arr[root_index + 1..arr.length])
-    if (this_node.left[0] <=> this_node.data) != 0
-      build_tree(this_node.left)
+  def build_tree(input)
+    if input[0] == 'nil'
+      return
     else
-      return this_node.data
+      root_index = input.length / 2
+      if root_index == 0
+        if input[root_index] == nil
+          return Node.new('nil')
+        end
+        return Node.new(input[root_index])
+      end
+      Node.new(input[root_index], build_tree(input[0..root_index - 1]), build_tree(input[root_index + 1..input.length]))
     end
-    if (this_node.right[0] <=> this_node.data) != 0
-      build_tree(this_node.right)
-    else
-      return this_node.data
-    end 
-    this_node
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
