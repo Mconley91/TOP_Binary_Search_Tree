@@ -16,7 +16,22 @@ class Tree
   end
 
   def insert(num, node = @root)
-    
+    if num == node.data
+      p "cannot insert duplicate nodes"
+    end
+    if num > node.data
+      if node.right == nil
+        node.right = Node.new(num)
+        return
+      end
+      insert(num, node.right)
+    else
+      if node.left == nil
+        node.left = Node.new(num)
+        return
+      end
+      insert(num, node.left)
+    end
   end
 
   def delete(num)
