@@ -38,16 +38,31 @@ class Tree
   def delete(num, node = @root)
     if num > node.data
       if node.right.data == num
-        node.right = nil
+        #FOUND TARGET ON RIGHT
+        lowest_node_on_right = find_lowest_in_tree(node.right.right)
+        node.right = lowest_node_on_right.data ? lowest_node_on_right  : node.right.data
+        node.right.right = nil
         return
       end
       delete(num, node.right)
     else
       if node.left.data == num
-        node.left = nil
+        #FOUND TARGET ON LEFT
+        lowest_node_on_right = find_lowest_in_tree(node.left.right)
+        node.left.data = lowest_node_on_right ? lowest_node_on_right.data : 'ERROR'
+        node.left.right = nil
         return
       end
       delete(num,node.left)
+    end
+  end
+
+  def find_lowest_in_tree(node)
+    return if node == nil
+    if node.left == nil
+      return node
+    else
+      find_lowest_in_tree(node.left)
     end
   end
 
