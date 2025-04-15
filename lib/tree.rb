@@ -50,12 +50,19 @@ class Tree
       node.data = temp.data
       node.left = temp.left
       node.right = temp.right
+    elsif node.left && node.right
+      lowest_node = find_lowest_in_tree(node.right)
+      node.data = lowest_node.data
+      if lowest_node.right
+        temp = lowest_node.right.data
+        delete(lowest_node.right.data) 
+      end
+      lowest_node.data = temp
     end
   end
 
   def find_lowest_in_tree(node)
-    return if node == nil
-    if node.left == nil
+    if !node.left
       return node
     else
       find_lowest_in_tree(node.left)
