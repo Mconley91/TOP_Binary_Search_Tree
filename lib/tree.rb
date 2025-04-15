@@ -41,13 +41,15 @@ class Tree
     if !node.left && !node.right
       node.data = nil
     elsif node.left && !node.right
-      node.right = node.left.right ? node.left.right : nil
-      node.data = node.left.data
-      node.left = node.left.left
+      temp = node.left
+      node.data = temp.data
+      node.left = temp.left
+      node.right = temp.right
     elsif !node.left && node.right
-      node.data = node.right.data
-      node.right = node.right.right
-      node.left = node.right.left
+      temp = node.right
+      node.data = temp.data
+      node.left = temp.left
+      node.right = temp.right
     end
   end
 

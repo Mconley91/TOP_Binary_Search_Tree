@@ -6,6 +6,5 @@ test.insert(0)
 test.insert(2)
 test.insert(14)
 test.insert(6)
-# test.delete(14)
-test.delete(23)
+# test.delete(6345)
 test.pretty_print
