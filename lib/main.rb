@@ -6,5 +6,6 @@ test.insert(0)
 test.insert(2)
 test.insert(14)
 test.insert(6)
-test.delete(7) #all leaf nodes are currently removable
 test.pretty_print
+
+# p test.find(3)
