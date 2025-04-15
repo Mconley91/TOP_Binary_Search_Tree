@@ -41,11 +41,13 @@ class Tree
     if !node.left && !node.right
       node.data = nil
     elsif node.left && !node.right
+      node.right = node.left.right ? node.left.right : nil
       node.data = node.left.data
       node.left = node.left.left
     elsif !node.left && node.right
       node.data = node.right.data
       node.right = node.right.right
+      node.left = node.right.left
     end
   end
 
@@ -70,7 +72,7 @@ class Tree
 
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
-    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
+    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}" if node.data
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
