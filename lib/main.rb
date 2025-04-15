@@ -6,6 +6,6 @@ test.insert(0)
 test.insert(2)
 test.insert(14)
 test.insert(6)
+p test.find(23)
+test.delete(23)
 test.pretty_print
-
-# p test.find(3)

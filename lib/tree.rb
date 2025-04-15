@@ -9,10 +9,11 @@ class Tree
 
   def build_tree(input)
     root_index = input.length / 2
-    if root_index == 0
+    if root_index == 0 && input[root_index]
       return Node.new(input[root_index])
+    elsif input[root_index]
+      Node.new(input[root_index], build_tree(input[0..root_index - 1]), build_tree(input[root_index + 1..input.length]))
     end
-    Node.new(input[root_index], build_tree(input[0..root_index - 1]), build_tree(input[root_index + 1..input.length]))
   end
 
   def insert(num, node = @root)
@@ -35,8 +36,17 @@ class Tree
     end
   end
 
-  def delete(num, node = @root)
-    
+  def delete(num)
+    node = find(num)
+    if !node.left && !node.right
+      node.data = nil
+    elsif node.left && !node.right
+      node.data = node.left.data
+      node.left = node.left.left
+    elsif !node.left && node.right
+      node.data = node.right.data
+      node.right = node.right.right
+    end
   end
 
   def find_lowest_in_tree(node)
