@@ -11,3 +11,4 @@ test.insert(6)
 # test.delete(4)
 # test.delete(1)
 test.pretty_print
+test.level_order.each {|value| p value.data}
