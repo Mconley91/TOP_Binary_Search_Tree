@@ -81,18 +81,24 @@ class Tree
 
   def level_order(block = [], node = @root, queue = [node])
     return if !node
-    if block.class == Array
-      if node.left then queue << node.left end
-      if node.right then queue << node.right end
-      block << queue.shift
-      level_order(block, queue[0], queue)
-      block
-    else
-      if node.left then queue << node.left end
-      if node.right then queue << node.right end
-      yield(queue.shift)
-      level_order(block, queue[0], queue)
-    end
+    if node.left then queue << node.left end
+    if node.right then queue << node.right end
+    block.class == Array ? block << queue.shift : yield(queue.shift)
+    level_order(block, queue[0], queue)
+    return block if block.class == Array
+  end
+
+  def inorder(block = [], node = @root)
+    return if !node
+
+  end
+
+  def preorder(block = [])
+    
+  end
+
+  def postorder(block = [])
+    
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
