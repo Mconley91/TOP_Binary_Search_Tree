@@ -69,7 +69,7 @@ class Tree
     end
   end
 
-  def find(num, node = root)
+  def find(num, node = @root)
     return nil if !node
     if num == node.data
       return node
@@ -113,14 +113,12 @@ class Tree
     return block if block.class == Array
   end
 
-  def height(num, count = 0)
-    node = find(num)
-    return nil if !node
-    if !node.left && !node.right
-      return count
-    else
-
-    end
+  def height(num, node = find(num))
+    return nil if !find(num)
+    return -1 if !node
+    left_height = height(num, node.left)
+    right_height = height(num, node.right)
+    return left_height > right_height ? left_height + 1 : right_height + 1
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
