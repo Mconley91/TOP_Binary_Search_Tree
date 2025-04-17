@@ -74,10 +74,11 @@ class Tree
       return node
     elsif num > node.data
       find(num,node.right)
-    else
+    elsif num < node.data
       find(num,node.left)
+    else
+      return nil
     end
-    nil
   end
 
   def level_order(block = [], node = @root, queue = [node])
@@ -119,7 +120,7 @@ class Tree
     if !node.left && !node.right
       return count
     else
-      
+
     end
   end
 
