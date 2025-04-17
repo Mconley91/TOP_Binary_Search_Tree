@@ -88,14 +88,6 @@ class Tree
     return block if block.class == Array
   end
 
-  def preorder(block = [], node = @root)
-    return if !node
-    block.class == Array ? block << node : yield(node)
-    preorder(block, node.left)
-    preorder(block, node.right)
-    return block if block.class == Array
-  end
-
   def inorder(block = [], node = @root)
     return if !node
     inorder(block, node.left)
@@ -104,10 +96,18 @@ class Tree
     return block if block.class == Array
   end
 
+  def preorder(block = [], node = @root)
+    return if !node
+    block.class == Array ? block << node : yield(node)
+    preorder(block, node.left)
+    preorder(block, node.right)
+    return block if block.class == Array
+  end
+
   def postorder(block = [], node = @root)
     return if !node
-    inorder(block, node.left)
-    inorder(block, node.right)
+    postorder(block, node.left)
+    postorder(block, node.right)
     block.class == Array ? block << node : yield(node)
     return block if block.class == Array
   end
