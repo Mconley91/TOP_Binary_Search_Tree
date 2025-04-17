@@ -90,7 +90,10 @@ class Tree
 
   def inorder(block = [], node = @root)
     return if !node
-
+    block.class == Array ? block << node : yield(node)
+    inorder(block, node.left)
+    inorder(block, node.right)
+    return block if block.class == Array
   end
 
   def preorder(block = [])
