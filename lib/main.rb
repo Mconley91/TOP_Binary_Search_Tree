@@ -12,4 +12,6 @@ test.insert(6)
 # test.delete(1)
 test.pretty_print
 # test.level_order.each {|value| p value.data}
-test.inorder.each {|value| p value.data}
+# test.inorder.each {|value| p value.data}
+# test.preorder.each {|value| p value.data}
+# test.postorder.each {|value| p value.data}
