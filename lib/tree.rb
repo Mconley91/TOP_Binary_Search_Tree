@@ -70,14 +70,13 @@ class Tree
   end
 
   def find(num, node = root)
+    return nil if !node
     if num == node.data
       return node
     elsif num > node.data
       find(num,node.right)
-    elsif num < node.data
-      find(num,node.left)
     else
-      return nil
+      find(num,node.left)
     end
   end
 
