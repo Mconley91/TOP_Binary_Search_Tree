@@ -77,6 +77,7 @@ class Tree
     else
       find(num,node.left)
     end
+    nil
   end
 
   def level_order(block = [], node = @root, queue = [node])
@@ -110,6 +111,16 @@ class Tree
     postorder(block, node.right)
     block.class == Array ? block << node : yield(node)
     return block if block.class == Array
+  end
+
+  def height(num, count = 0)
+    node = find(num)
+    return nil if !node
+    if !node.left && !node.right
+      return count
+    else
+      
+    end
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
