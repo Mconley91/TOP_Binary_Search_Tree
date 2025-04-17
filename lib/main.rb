@@ -15,4 +15,4 @@ test.pretty_print
 # test.inorder.each {|value| p value.data}
 # test.preorder.each {|value| p value.data}
 # test.postorder.each {|value| p value.data}
-# p test.height(55)
+# p test.depth(0)

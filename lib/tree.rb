@@ -121,6 +121,12 @@ class Tree
     return left_height > right_height ? left_height + 1 : right_height + 1
   end
 
+  def depth(num, node = @root)
+    return nil if !find(num)
+    return 0 if node == find(num)
+    return num > node.data ? depth(num, node.right) + 1 : depth(num, node.left) + 1
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}" if node.data
