@@ -6,10 +6,10 @@ test.insert(0)
 test.insert(2)
 test.insert(14)
 test.insert(6)
-# test.delete(67)
-# test.delete(8)
-# test.delete(4)
-# test.delete(1)
+test.delete(67)
+test.delete(8)
+test.delete(4)
+test.delete(1)
 test.pretty_print
 # test.level_order.each {|value| p value.data}
 # test.inorder.each {|value| p value.data}

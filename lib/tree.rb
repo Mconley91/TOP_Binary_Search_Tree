@@ -71,7 +71,7 @@ class Tree
   end
 
   def find(num, node = @root)
-    return nil if !node
+    return nil if !node || !num
     if num == node.data
       return node
     elsif num > node.data
@@ -131,6 +131,7 @@ class Tree
   def balanced?
     @balanced = true
     inorder do|node| 
+      p node.left, node.right
       if height(node.left ? node.left.data : 0) - height(node.right ? node.right.data : 0) > 1
         @balanced = false
       end
