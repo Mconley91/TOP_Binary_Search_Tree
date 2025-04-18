@@ -16,4 +16,4 @@ test.pretty_print
 # test.preorder.each {|value| p value.data}
 # test.postorder.each {|value| p value.data}
 # p test.depth(0)
-test.balanced?
+p test.balanced?

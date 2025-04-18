@@ -5,6 +5,7 @@ class Tree
   def initialize(arr)
     @sorted_arr = arr.uniq.sort
     @root = self.build_tree(@sorted_arr)
+    @balanced = true
   end
 
   def build_tree(input)
@@ -128,7 +129,13 @@ class Tree
   end
 
   def balanced?
-    inorder {|node| puts "Caught: #{node.data}"}
+    @balanced = true
+    inorder do|node| 
+      if height(node.left ? node.left.data : 0) - height(node.right ? node.right.data : 0) > 1
+        @balanced = false
+      end
+    end
+    @balanced
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
