@@ -80,37 +80,37 @@ class Tree
     end
   end
 
-  def level_order(block = [], node = @root, queue = [node])
+  def level_order(arr = [], node = @root, queue = [node], &block)
     return if !node
     if node.left then queue << node.left end
     if node.right then queue << node.right end
-    block.class == Array ? block << queue.shift : yield(queue.shift)
-    level_order(block, queue[0], queue)
-    return block if block.class == Array
+    block_given? ? yield(queue.shift) : arr << queue.shift
+    level_order(arr, queue[0], queue, &block)
+    return arr if !block_given?
   end
 
-  def inorder(block = [], node = @root)
+  def inorder(arr = [], node = @root, &block)
     return if !node
-    inorder(block, node.left)
-    block.class == Array ? block << node : yield(node)
-    inorder(block, node.right)
-    return block if block.class == Array
+    inorder(arr, node.left, &block)
+    block_given? ? yield(node) : arr << node
+    inorder(arr, node.right, &block)
+    return arr if !block_given?
   end
 
-  def preorder(block = [], node = @root)
+  def preorder(arr = [], node = @root, &block)
     return if !node
-    block.class == Array ? block << node : yield(node)
-    preorder(block, node.left)
-    preorder(block, node.right)
-    return block if block.class == Array
+    block_given? ? yield(node) : arr << node
+    preorder(arr, node.left, &block)
+    preorder(arr, node.right, &block)
+    return arr if !block_given?
   end
 
-  def postorder(block = [], node = @root)
+  def postorder(arr = [], node = @root, &block)
     return if !node
-    postorder(block, node.left)
-    postorder(block, node.right)
-    block.class == Array ? block << node : yield(node)
-    return block if block.class == Array
+    postorder(arr, node.left, &block)
+    postorder(arr, node.right, &block)
+    block_given? ? yield(node) : arr << node
+    return arr if !block_given?
   end
 
   def height(num, node = find(num))
@@ -125,6 +125,10 @@ class Tree
     return nil if !find(num)
     return 0 if node == find(num)
     return num > node.data ? depth(num, node.right) + 1 : depth(num, node.left) + 1
+  end
+
+  def balanced?
+    inorder {|node| puts "Caught: #{node.data}"}
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
