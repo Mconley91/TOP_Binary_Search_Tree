@@ -115,8 +115,8 @@ class Tree
   end
 
   def height(num, node = find(num))
-    return nil if !find(num)
-    return -1 if !node
+    # return nil if !find(num)
+    return -1 if !node || node.data == nil
     left_height = height(num, node.left)
     right_height = height(num, node.right)
     return left_height > right_height ? left_height + 1 : right_height + 1
@@ -131,7 +131,7 @@ class Tree
   def balanced?
     @balanced = true
     inorder do|node| 
-      p node.left, node.right
+      # p node.left, node.right
       if height(node.left ? node.left.data : 0) - height(node.right ? node.right.data : 0) > 1
         @balanced = false
       end
