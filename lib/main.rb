@@ -12,6 +12,10 @@ test.delete(4)
 test.delete(1)
 test.delete(6)
 test.pretty_print
+p "Is the Tree Balanced?: #{test.balanced? ? 'Yes' : 'No'}"
+test.rebalance
+test.pretty_print
+p "Is the Tree Balanced now?: #{test.balanced? ? 'Yes' : 'No'}"
 
 # p test.height(3)
 # p test.height(7)
@@ -21,4 +25,3 @@ test.pretty_print
 # test.preorder.each {|value| p value.data}
 # test.postorder.each {|value| p value.data}
 # p test.depth(0)
-p "Is the Tree Balanced?: #{test.balanced? ? 'Yes' : 'No'}"
