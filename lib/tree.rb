@@ -18,8 +18,6 @@ class Tree
   end
 
   def insert(num, node = @root)
-    # return if node.data == nil
-    # p "#{num} & #{node.data}"
     if num == node.data
       p "Error: '#{num}' is invalid. Cannot insert value that already exists in tree!"
       return
@@ -121,7 +119,6 @@ class Tree
   end
 
   def height(num, node = find(num))
-    # return nil if !find(num)
     return -1 if !node || node.data == nil
     left_height = height(num, node.left)
     right_height = height(num, node.right)
@@ -137,33 +134,40 @@ class Tree
   def balanced?
     @balanced = true
     inorder do|node| 
-      if height(node.left ? node.left.data : 0) - height(node.right ? node.right.data : 0) > 1
+      left = height(node.left ? node.left.data : 0)
+      right = height(node.right ? node.right.data : 0)
+      if left - right > 1 || left - right < 0
         @balanced = false
       end
+      # p "Is balanced?: #{@balanced}, Data: #{node.data}, height difference: #{left - right}"
     end
     @balanced
   end
 
   def rebalance
-    if self.balanced?
+
+    if balanced?
       p "Tree is already balanced"
       return
     end
+
     inorder do|node| 
       left = height(node.left ? node.left.data : 0)
       right = height(node.right ? node.right.data : 0)
-      if left - right > 1
+      if left - right > 1 || left - right < 0
         if left > right
-          #add node to right branch
+          p "Placing #{node.data + 1} in right branch"
           insert(node.data + 1)
         else
-          #add node to left branch
+          p "Placing #{node.data - 1} in left branch"
           insert(node.data - 1)
         end
-        if !balanced?
-          rebalance
-        end
       end
+      
+      # if !@balanced
+      #   p 'balance checking ran'
+      #   rebalance
+      # end
     end
   end
 
