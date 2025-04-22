@@ -20,7 +20,7 @@ class Tree
   def insert(num, node = @root)
     if num == node.data
       p "Error: '#{num}' is invalid. Cannot insert value that already exists in tree!"
-      return
+      return nil
     end
     if node.data == nil 
       node.data = num
@@ -145,30 +145,24 @@ class Tree
   end
 
   def rebalance
-
     if balanced?
-      p "Tree is already balanced"
+      p "Tree is already balanced!"
       return
     end
-
+    arr = []
     inorder do|node| 
-      left = height(node.left ? node.left.data : 0)
-      right = height(node.right ? node.right.data : 0)
-      if left - right > 1 || left - right < 0
-        if left > right
-          p "Placing #{node.data + 1} in right branch"
-          insert(node.data + 1)
-        else
-          p "Placing #{node.data - 1} in left branch"
-          insert(node.data - 1)
+      if node.data != nil
+        arr << node.data
+        left = height(node.left ? node.left.data : 0)
+        right = height(node.right ? node.right.data : 0)
+        difference = left > right ? left - right : right - left
+        if difference <= 1
+          random = rand(1..(node.data))
+          arr << random
         end
       end
-      
-      # if !@balanced
-      #   p 'balance checking ran'
-      #   rebalance
-      # end
     end
+    @root = build_tree(arr.uniq.sort)
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
