@@ -139,7 +139,6 @@ class Tree
       if left - right > 1 || left - right < 0
         @balanced = false
       end
-      # p "Is balanced?: #{@balanced}, Data: #{node.data}, height difference: #{left - right}"
     end
     @balanced
   end
